@@ -38,7 +38,7 @@ handle_info(timeout, #state{lsock=LSock, mod=M,
       gen_tcp:close(Sock),
       {noreply, State#state{arg = NewArg}};
     {ok, NewArg} ->
-      tserver_sup:start_child(Parent),
+      tcpserver_sup:start_child(Parent),
       inet:setopts(Sock, [{active,once}]),
       {noreply, State#state{lsock = Sock, arg = NewArg}}
   end.
